@@ -1,20 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package org.gabrielescobedo.system;
 
-/**
- *
- * @author informatica
- */
-public class Main {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+import javafx.application.Application;
+import javafx.scene.Scene;   
+import javafx.stage.Stage;
+import org.gabrielescobedo.view.CalculadoraView;
+ 
+ 
+public class Main extends Application {
     
+    @Override
+    public void start(Stage primaryStage) {
+        CalculadoraView calculadora = new CalculadoraView();
+
+        // Se le pasa la vista directamente a la escena
+        Scene scene = new Scene(calculadora.getView(), 260, 390);
+
+        primaryStage.setTitle("CalculadoraFX");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
