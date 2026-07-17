@@ -1,4 +1,3 @@
-
 package org.gabrielescobedo.controller;
 
 import javafx.scene.control.Label;
@@ -15,13 +14,13 @@ public class CalculadoraController {
 
     public void procesoDeEntrada(String entrada, Label pant) {
         if (entrada.equals("C")) {
-            limpiarCampos();
+        actualizarPantalla();
             pant.setText("");
             return;
         }
 
         if (calculoTerminado && entrada.matches("[0-9]")) {
-            limpiarCampos();
+        actualizarPantalla();
         }
         calculoTerminado = false;
 
@@ -31,19 +30,19 @@ public class CalculadoraController {
             } else {
                 opcion2 += entrada;
             }
-            actualizarPantalla(pant);
+            actualizarPantalla();
         } 
         else if (entrada.equals("√")) {
             if (!opcion1.isEmpty() && operador.isEmpty()) {
                 opcion1 = RaizCuadrada(opcion1);
                 calculoTerminado = true;
-                actualizarPantalla(pant);
+                actualizarPantalla();
             }
         } 
         else if (entrada.equals("+") || entrada.equals("-") || entrada.equals("*") || entrada.equals("/")) {
             if (!opcion1.isEmpty()) {
                 operador = entrada;
-                actualizarPantalla(pant);
+                actualizarPantalla();
             }
         } 
         else if (entrada.equals("=")) {
@@ -53,22 +52,17 @@ public class CalculadoraController {
             operador = "";
             opcion2 = "";
             calculoTerminado = true;
-            actualizarPantalla(pant);
+            actualizarPantalla();
         }
     }
 
-    private void actualizarPantalla(Label pantalla) {
+    private void actualizarPantalla() {
         if (operador.isEmpty()) {
             pantalla.setText(opcion1);
         } else {
             pantalla.setText(opcion1 + " " + operador + " " + opcion2);
         }
     }
-
-    private void limpiarCampos() {
-        opcion1 = "";
-        operador = "";
-        opcion2 = "";
     }
 
     private String resultadoSuma(String numeroUno, String numeroDos) {
