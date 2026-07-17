@@ -53,6 +53,9 @@ Button btnMult = nuevoBoton("*");
 Button btnDiv = nuevoBoton("/");
 Button btnIgual = nuevoBoton("=");
 Button btnRaiz = nuevoBoton("√");
+Button btnporcentaje = nuevoBoton("%");
+Button btnpotencia = nuevoBoton("^");
+Button btnpuntod = nuevoBoton(".");
 Button btnC = nuevoBoton("C");
 
 cuadroBotones.add(btnUno, 0, 3);
@@ -72,6 +75,9 @@ cuadroBotones.add(btnC, 3, 3);
 cuadroBotones.add(btnMult, 0, 6);
 cuadroBotones.add(btnDiv, 2, 6);
 cuadroBotones.add(btnRaiz, 0, 7);
+cuadroBotones.add(btnpuntod, 1, 7);
+cuadroBotones.add(btnporcentaje, 2, 7);
+cuadroBotones.add(btnpotencia, 3, 7);
 
         }
 public VBox  getView(){

@@ -1,5 +1,4 @@
 package org.gabrielescobedo.controller;
-
 import javafx.scene.control.Label;
 
 public class CalculadoraController {
@@ -28,6 +27,7 @@ public class CalculadoraController {
              operador = "";
              opcion2 = "";
         }
+        
         if (entrada.matches("[0-9]")) {
             calculoTerminado = false;
             if (operador.isEmpty()){
@@ -37,21 +37,20 @@ public class CalculadoraController {
             }
             actualizarPantalla(pant); 
         } 
-        else if (entrada.equals("+") || entrada.equals("-") || entrada.equals("*") || entrada.equals("/")) { 
+        // Agregamos el símbolo "^" a la lista de operadores tradicionales
+        else if (entrada.equals("+") || entrada.equals("-") || entrada.equals("*") || entrada.equals("/") || entrada.equals("^")) { 
             calculoTerminado = false;
             operador = entrada;
             actualizarPantalla(pant);
         } 
         else if (entrada.equals("√")) {
- 
             if (!opcion2.isEmpty()) {
                 opcion2 = resultadoRaizCuadrada(opcion2);
             } else if (!opcion1.isEmpty()) {
                 opcion1 = resultadoRaizCuadrada(opcion1);
-                operador = "";
+                operador = ""; 
             }
-            
-            calculoTerminado = true;
+            calculoTerminado = true; 
             actualizarPantalla(pant);
         }
         else if (entrada.equals("=")){
@@ -63,16 +62,16 @@ public class CalculadoraController {
                 opcion1 = resultadoMultiplicacion(opcion1, opcion2);
             } else if (operador.equals("/")) {
                 opcion1 = resultadoDivision(opcion1, opcion2);
+            } 
+            else if (operador.equals("^")) {
+                opcion1 = resultadoPotencia(opcion1, opcion2);
             }
-
             operador = "";
             opcion2 = "";
             calculoTerminado = true; 
-
             actualizarPantalla(pant);
         }
     }
-
     private void actualizarPantalla(Label pantalla) {
         if (opcion1.equals("Error")) {
             pantalla.setText("Error");
@@ -128,5 +127,12 @@ public class CalculadoraController {
         double raiz = Math.sqrt(dato);
         return String.valueOf(raiz);
     }
+    private String resultadoPotencia(String baseStr, String exponenteStr) {
+        if (baseStr.isEmpty() || baseStr.equals("Error")) return "Error";
+        if (exponenteStr.isEmpty()) return baseStr;
+        double base = Double.parseDouble(baseStr);
+        double exponente = Double.parseDouble(exponenteStr);
+        double resultado = Math.pow(base, exponente);
+        return String.valueOf(resultado);
+    }
 }
- 
