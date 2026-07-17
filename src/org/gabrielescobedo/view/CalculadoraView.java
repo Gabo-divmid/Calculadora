@@ -15,12 +15,12 @@ public class CalculadoraView {
 private final VBox view;
 private final Label pantalla;
 private final   GridPane cuadroBotones;
- 
-//Controller
-private CalculadoraController Controlador;
-    Controlador = new CalculadoraController;
- 
+private final CalculadoraController Controller;
+
+
 public CalculadoraView() {
+       Controller = new CalculadoraController();
+    
 view = new VBox(15);
 view.setPadding(new Insets(15));
 view.setAlignment(Pos.CENTER);
@@ -38,7 +38,6 @@ cuadroBotones.setAlignment(Pos.CENTER);
 view.getChildren().addAll(pantalla, cuadroBotones);//Alineado al centro
 
 Button btnUno = nuevoBoton("1");
-btnUno
 Button btnDos = nuevoBoton("2");
 Button btnTres = nuevoBoton("3");
 Button btnCuatro = nuevoBoton("4");
@@ -47,9 +46,13 @@ Button btnSeis = nuevoBoton("6");
 Button btnSiete = nuevoBoton("7");
 Button btnOcho = nuevoBoton("8");
 Button btnNueve = nuevoBoton("9");
+Button btnCero = nuevoBoton("0");
 Button btnMenos = nuevoBoton("-");
 Button btnMas = nuevoBoton("+");
-Button btnMultiplicacion = nuevoBoton("x");
+Button btnMult = nuevoBoton("*");
+Button btnDiv = nuevoBoton("/");
+Button btnIgual = nuevoBoton("=");
+Button btnC = nuevoBoton("C");
 
 cuadroBotones.add(btnUno, 0, 3);
 cuadroBotones.add(btnDos, 1, 3);
@@ -60,9 +63,14 @@ cuadroBotones.add(btnSeis, 2, 4);
 cuadroBotones.add(btnSiete, 0, 5);
 cuadroBotones.add(btnOcho, 1, 5);
 cuadroBotones.add(btnNueve, 2, 5);
-cuadroBotones.add(btnMas, 3, 3);
+cuadroBotones.add(btnCero, 1, 6);
+cuadroBotones.add(btnMas, 3, 5);
 cuadroBotones.add(btnMenos, 3, 4);
-cuadroBotones.add(btnMultiplicacion, 3, 5);
+cuadroBotones.add(btnIgual, 3, 6);
+cuadroBotones.add(btnC, 3, 3);
+cuadroBotones.add(btnMult, 0, 6);
+cuadroBotones.add(btnDiv, 2, 6);
+
         }
 public VBox  getView(){
 return view;
@@ -80,7 +88,7 @@ return view;
         btn.setStyle("-fx-background-color:#055270;");
         btn.setTranslateY(0);
 });
-        btn.setOnAction(e-> controller.procesoDeEntrada(texto,pantalla));
+        btn.setOnAction(e-> Controller.procesoDeEntrada(texto,pantalla));
         return btn;
         
     }
