@@ -52,6 +52,7 @@ Button btnMas = nuevoBoton("+");
 Button btnMult = nuevoBoton("*");
 Button btnDiv = nuevoBoton("/");
 Button btnIgual = nuevoBoton("=");
+Button btnRaiz = nuevoBoton("√");
 Button btnC = nuevoBoton("C");
 
 cuadroBotones.add(btnUno, 0, 3);
@@ -70,6 +71,7 @@ cuadroBotones.add(btnIgual, 3, 6);
 cuadroBotones.add(btnC, 3, 3);
 cuadroBotones.add(btnMult, 0, 6);
 cuadroBotones.add(btnDiv, 2, 6);
+cuadroBotones.add(btnRaiz, 0, 7);
 
         }
 public VBox  getView(){

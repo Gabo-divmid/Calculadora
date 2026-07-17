@@ -2,61 +2,61 @@
 package org.gabrielescobedo.controller;
 
 import javafx.scene.control.Label;
- 
+
 public class CalculadoraController {
- 
+
     private String opcion1 = "";
     private String operador = "";
     private String opcion2 = "";
     private boolean calculoTerminado = true;
- 
+
     public CalculadoraController() {
     }
- 
+
     public void procesoDeEntrada(String entrada, Label pant) {
-        if (entrada.equals("C")){
-             opcion1 = "";
-             operador = "";
-             opcion2 = "";
-             pant.setText("");
+        if (entrada.equals("C")) {
+            limpiarCampos();
+            pant.setText("");
+            return;
         }
 
-        if ( calculoTerminado && entrada.matches("[0-9]")){
-             opcion1 = "";
-             operador = "";
-             opcion2 = "";
+        if (calculoTerminado && entrada.matches("[0-9]")) {
+            limpiarCampos();
         }
         calculoTerminado = false;
- 
+
         if (entrada.matches("[0-9]")) {
-            if  (operador.isEmpty()){
-               opcion1 += entrada;
+            if (operador.isEmpty()) {
+                opcion1 += entrada;
             } else {
                 opcion2 += entrada;
             }
-            actualizarPantalla(pant); 
-        } 
-
-        else if (entrada.equals("+") || entrada.equals("-") || entrada.equals("*") || entrada.equals("/")) { 
-            operador = entrada;
             actualizarPantalla(pant);
-        } else if (entrada.equals("=")){
-            if (operador.equals("+")) {
-                opcion1 = resultadoSuma(opcion1, opcion2);
-            } else if (operador.equals("-")) {
-                opcion1 = resultadoResta(opcion1, opcion2);
-            } else if (operador.equals("*")) {
-                opcion1 = resultadoMultiplicacion(opcion1, opcion2);
-            } else if (operador.equals("/")) {
-                opcion1 = resultadoDiv(opcion1, opcion2);
+        } 
+        else if (entrada.equals("√")) {
+            if (!opcion1.isEmpty() && operador.isEmpty()) {
+                opcion1 = RaizCuadrada(opcion1);
+                calculoTerminado = true;
+                actualizarPantalla(pant);
+            }
+        } 
+        else if (entrada.equals("+") || entrada.equals("-") || entrada.equals("*") || entrada.equals("/")) {
+            if (!opcion1.isEmpty()) {
+                operador = entrada;
+                actualizarPantalla(pant);
+            }
+        } 
+        else if (entrada.equals("=")) {
+            if (opcion1.isEmpty() || operador.isEmpty() || opcion2.isEmpty()) {
+                return; 
             }
             operador = "";
             opcion2 = "";
-            calculoTerminado = true; 
+            calculoTerminado = true;
             actualizarPantalla(pant);
         }
     }
- 
+
     private void actualizarPantalla(Label pantalla) {
         if (operador.isEmpty()) {
             pantalla.setText(opcion1);
@@ -64,33 +64,46 @@ public class CalculadoraController {
             pantalla.setText(opcion1 + " " + operador + " " + opcion2);
         }
     }
- 
- 
-    private String resultadoSuma(String numeroUno, String numeroDos){
-         int datoUno = Integer.parseInt(numeroUno);
-         int datoDos = Integer.parseInt(numeroDos);
-         int suma = datoUno + datoDos;
-         return String.valueOf(suma);
+
+    private void limpiarCampos() {
+        opcion1 = "";
+        operador = "";
+        opcion2 = "";
     }
- 
-    private String resultadoResta(String numeroUno, String numeroDos){
-         int datoUno = Integer.parseInt(numeroUno);
-         int datoDos = Integer.parseInt(numeroDos);
-         int resta = datoUno - datoDos;
-         return String.valueOf(resta);
+
+    private String resultadoSuma(String numeroUno, String numeroDos) {
+        int datoUno = Integer.parseInt(numeroUno);
+        int datoDos = Integer.parseInt(numeroDos);
+        return String.valueOf(datoUno + datoDos);
     }
- 
-    private String resultadoMultiplicacion(String numeroUno, String numeroDos){
-         int datoUno = Integer.parseInt(numeroUno);
-         int datoDos = Integer.parseInt(numeroDos);
-         int multiplicacion = datoUno * datoDos;
-         return String.valueOf(multiplicacion);
+
+    private String resultadoResta(String numeroUno, String numeroDos) {
+        int datoUno = Integer.parseInt(numeroUno);
+        int datoDos = Integer.parseInt(numeroDos);
+        return String.valueOf(datoUno - datoDos);
     }
- 
-    private String resultadoDiv(String numeroUno, String numeroDos){
-         double datoUno = Double.parseDouble(numeroUno);
-         double datoDos = Double.parseDouble(numeroDos);
-         double div = datoUno / datoDos;
-         return String.valueOf(div);
+
+    private String resultadoMultiplicacion(String numeroUno, String numeroDos) {
+        int datoUno = Integer.parseInt(numeroUno);
+        int datoDos = Integer.parseInt(numeroDos);
+        return String.valueOf(datoUno * datoDos);
+    }
+
+    private String resultadoDiv(String numeroUno, String numeroDos) {
+        double datoUno = Double.parseDouble(numeroUno);
+        double datoDos = Double.parseDouble(numeroDos);
+        return String.valueOf(datoUno / datoDos);
+    }
+
+    private String RaizCuadrada(String numeroUno) {
+        try {
+            double numero = Double.parseDouble(numeroUno);
+            if (numero < 0) {
+                return "Error";
+            }
+            return String.valueOf(Math.sqrt(numero));
+        } catch (NumberFormatException e) {
+            return "0";
+        }
     }
 }
