@@ -19,14 +19,12 @@ public class CalculadoraView {
 
     public CalculadoraView() {
         Controller = new CalculadoraController();
-        
-        // Contenedor principal: Fondo azul original corregido
+    
         view = new VBox(15);
         view.setPadding(new Insets(15));
         view.setAlignment(Pos.CENTER);
         view.setStyle("-fx-background-color: #0992C8;");
         
-        // Pantalla: Estilo limpio y bordes redondeados básicos
         pantalla = new Label("0");
         pantalla.setFont(Font.font("Consolas", FontWeight.BOLD, 40));
         pantalla.setAlignment(Pos.CENTER_RIGHT);
@@ -46,7 +44,6 @@ public class CalculadoraView {
         
         view.getChildren().addAll(pantalla, cuadroBotones);
 
-        // Declaración de botones
         Button btnUno = nuevoBoton("1");
         Button btnDos = nuevoBoton("2");
         Button btnTres = nuevoBoton("3");
@@ -68,7 +65,6 @@ public class CalculadoraView {
         Button btnpuntod = nuevoBoton(".");
         Button btnC = nuevoBoton("C");
 
-        // Posiciones en la cuadrícula
         cuadroBotones.add(btnUno, 0, 3);
         cuadroBotones.add(btnDos, 1, 3);
         cuadroBotones.add(btnTres, 2, 3);

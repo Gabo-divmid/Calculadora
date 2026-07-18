@@ -19,3 +19,7 @@ org.gabrielescobedo
     - OBS- grabar - microfono
     - Presente su calculadora funcionando: operaciones, operaciones extra
     - Presente la estructura de su codigo.
+    - Enlace de Video
+
+## Video 
+ - https://youtu.be/TxyRDQrnXxw

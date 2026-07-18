@@ -139,7 +139,7 @@ public class CalculadoraController {
     private String resultadoPotencia(String baseStr, String exponenteStr) {
         if (baseStr.isEmpty() || baseStr.equals("Error")) return "Error";
         if (exponenteStr.isEmpty()) return baseStr;
-        double base = Double.parseDouble(baseStr);
+        double base = Double.parseDouble(baseStr); 
         double exponente = Double.parseDouble(exponenteStr);
         return String.valueOf(Math.pow(base, exponente));
     }
