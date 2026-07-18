@@ -21,22 +21,18 @@ public class CalculadoraController {
              calculoTerminado = true;
              return;
         }
-
         if (calculoTerminado && (entrada.matches("[0-9]") || entrada.equals("."))){
              opcion1 = "";
              operador = "";
              opcion2 = "";
         }
-        
         if (entrada.matches("[0-9]") || entrada.equals(".")) {
             calculoTerminado = false;
             
             if (operador.isEmpty()){
- 
                 if (entrada.equals(".") && opcion1.contains(".")) {
                     return; 
                 }
-
                 if (entrada.equals(".") && opcion1.isEmpty()) {
                     opcion1 = "0";
                 }
@@ -52,11 +48,12 @@ public class CalculadoraController {
             }
             actualizarPantalla(pant); 
         } 
-        else if (entrada.equals("+") || entrada.equals("-") || entrada.equals("*") || entrada.equals("/") || entrada.equals("^")) { 
+        else if (entrada.equals("+") || entrada.equals("-") || entrada.equals("*") || entrada.equals("/") || entrada.equals("^") || entrada.equals("%")) { 
             calculoTerminado = false;
             if (opcion1.endsWith(".")) {
                 opcion1 += "0";
             }
+            
             operador = entrada;
             actualizarPantalla(pant);
         } 
@@ -83,7 +80,9 @@ public class CalculadoraController {
             } else if (operador.equals("/")) {
                 opcion1 = resultadoDivision(opcion1, opcion2);
             } else if (operador.equals("^")) {
-                opcion1 = resultadoPotencia(opcion1, opcion2);
+                opcion1 = resultadoPotencia(opcion1, exponenteInvalido(opcion2));
+            } else if (operador.equals("%")) {
+                opcion1 = resultadoPorcentaje(opcion1, opcion2);
             }
 
             operador = "";
@@ -99,7 +98,6 @@ public class CalculadoraController {
             pantalla.setText("Error");
             return;
         }
-        
         if (operador.isEmpty()) {
             pantalla.setText(opcion1);
         } else {
@@ -160,5 +158,20 @@ public class CalculadoraController {
 
         double resultado = Math.pow(base, exponente);
         return String.valueOf(resultado);
+    }
+
+    private String resultadoPorcentaje(String numeroUno, String numeroDos) {
+        if (numeroUno.isEmpty() || numeroUno.equals("Error")) return "Error";
+        if (numeroDos.isEmpty()) return numeroUno;
+
+        double datoUno = Double.parseDouble(numeroUno);
+        double datoDos = Double.parseDouble(numeroDos);
+        double porcentaje = (datoUno * datoDos) / 100;
+
+        return String.valueOf(porcentaje);
+    }
+
+    private String exponenteInvalido(String exp) {
+        return exp.isEmpty() ? "1" : exp;
     }
 }
